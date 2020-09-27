@@ -10,21 +10,21 @@ I had been deploying to virtual machines on the cloud, but wanted a solution tha
 
 1. Add the SBT native packager to project/plugins.sbt. This lets you build application packages in native formats
 
-	addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.7.5")
+	```addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.7.5")```
 
 2. Package your application and create launch scripts using the [Java app packaging plugin](https://sbt-native-packager.readthedocs.io/en/latest/archetypes/java_app/index.html#java-app-plugin)
 
-	enablePlugins(JavaAppPackaging)
+	```enablePlugins(JavaAppPackaging)```
     
 3. Ask SBT to build Docker images. You will need a Docker client has to be installed**
 
-	enablePlugins(DockerPlugin)
+	```enablePlugins(DockerPlugin)```
     
 4. That's it, Now check it out
 
-    sbt docker:publishLocal
+    ```sbt docker:publishLocal```
     
-    docker run --rm -p8080:8080 payment-rules:1.0
+    ```docker run --rm -p8080:8080 payment-rules:1.0```
  
 ## Customisation
 This should work out of the box, but you can customise each step
