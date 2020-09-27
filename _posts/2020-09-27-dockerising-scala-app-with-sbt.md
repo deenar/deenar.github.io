@@ -60,4 +60,3 @@ You can use the sbt-git plugin to give meaningful tags to your images
 	addSbtPlugin("com.typesafe.sbt" % "sbt-git" % "0.9.3")
     
 In part 2 I will cover how to deploy this Docker image to Google Cloud Run.
-
