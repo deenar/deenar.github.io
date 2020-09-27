@@ -20,11 +20,14 @@ I had been deploying to virtual machines on the cloud, but wanted a solution tha
 
 		enablePlugins(DockerPlugin)
     
-4. That's it, Now check it out
+4. Build and publish your image
 
 		sbt docker:publishLocal
+        
     	
-        docker run --rm -p8080:8080 payment-rules:1.0
+5. Take it for a spin
+
+       docker run --rm -p8080:8080 payment-rules:1.0
  
 ## Customisation
 This should work out of the box, but you can customise each step
