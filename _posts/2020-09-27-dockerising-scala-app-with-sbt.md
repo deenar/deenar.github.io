@@ -6,25 +6,28 @@ I am working on developing a rules engine designed to handle ISO20022 standard p
 
 I had been deploying to virtual machines on the cloud, but wanted a solution that was more cost effective and scalable. Cloud Run is a service by Google Cloud Platform to run your stateless HTTP containers without worrying about provisioning machines, clusters or autoscaling. The first step was to dockerize my application. It turned out that dockerizing a Scala application is pretty easy
 
-**Add the SBT native packager to project/plugins.sbt. This lets you build application packages in native formats**
+## SBT Setup
+
+1. Add the SBT native packager to project/plugins.sbt. This lets you build application packages in native formats
 
 	addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.7.5")
 
-**Package your application and create launch scripts using the [Java app packaging plugin](https://sbt-native-packager.readthedocs.io/en/latest/archetypes/java_app/index.html#java-app-plugin)**
+2. Package your application and create launch scripts using the [Java app packaging plugin](https://sbt-native-packager.readthedocs.io/en/latest/archetypes/java_app/index.html#java-app-plugin)
 
 	enablePlugins(JavaAppPackaging)
     
-**Ask SBT to build Docker images. You will need a Docker client has to be installed**
+3. Ask SBT to build Docker images. You will need a Docker client has to be installed**
 
 	enablePlugins(DockerPlugin)
     
-**That's it, Now check it out**
+4. That's it, Now check it out
 
     sbt docker:publishLocal
     
     docker run --rm -p8080:8080 payment-rules:1.0
  
-**This should work out of the box, but you can customise each steps**
+## Customisation
+This should work out of the box, but you can customise each step
 
 Customise the packaging and launch scripts (e.g. setting environment variables or JVM parameter using the various JavaAppPackaging plugin settings)
 
