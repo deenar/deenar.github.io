@@ -1,11 +1,7 @@
 ---
 published: true
 ---
----
-layout: post
-title:  Dockerising your scala app with SBT
-categories: [Scala,Docker]
----
+
 I am working on developing a rules engine designed to handle ISO20022 standard payment (SWIFT) and securities messages. It handles parsing, validation and enrichment of message and provides business users access to these features via a simple English like DSL. More about this later.
 
 I had been deploying to virtual machines on the cloud, but wanted a solution that was more cost effective and scalable. Cloud Run is a service by Google Cloud Platform to run your stateless HTTP containers without worrying about provisioning machines, clusters or autoscaling. The first step was to dockerize my application. It turned out that dockerizing a Scala application is pretty easy
