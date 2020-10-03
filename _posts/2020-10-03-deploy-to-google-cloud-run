@@ -1,5 +1,8 @@
 ---
-published: false
+published: true
+layout: post
+title: Deploying your application to Google Cloud Run
+categories: [GCP, DevOps, Docker, Bitbucket]
 ---
 ## Checklist
 - Google Cloud Account
