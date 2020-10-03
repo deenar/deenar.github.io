@@ -12,15 +12,112 @@ published: false
 - Download the credentials
 
 ##Step 2 - Push your Docker image to [GCR](https://cloud.google.com/container-registry)
-
+Customise your Docker image publishing in build.sbt
+```
 dockerBaseImage := "java:8-jre"
-packageName in Docker := "you-gcloud-project-id/api"
+packageName in Docker := "<you-gcloud-project-id>/api"
 maintainer in Docker := "Maintainer"
 packageSummary := "Package summary"
 packageDescription := "Package description"
 dockerRepository := Some("us.gcr.io")
-
+```
 - Substitute your Google Cloud Project ID in the packageName field
 - Set dockerRepository to whichever gcr.io host you want to use.
-- Authenticate using the Google Cloud SDK
+- Authenticate using the Google Cloud SDK using the service account credentials used in Step 1
 - Run sbt docker:publish
+
+## Step 3 - Create a Google Cloud Run service
+[Head to Google Cloud Run](https://console.cloud.google.com/run) and create a new service
+	- Select a region
+    - Pick a service name
+    - Select unauthenticated invocations
+    - Choose the container image you uploaded to GCR in Step 2
+    - Ask GCP to forward traffic to the port your application listens on and set any environment variables required
+    - Choose the service account created in Step 1 to run the application
+    - Under advanced setting choose memory and CPU allocation and auto scaling parameters
+    - Press Create
+    
+## Step 3 - Check your application    
+    - GCP deploys your application and makes it available on the URL listed
+    - Check you application 
+    - Look at logs for troubleshooting
+    
+
+## Step 4 - Automate your deployment process    
+    - I am using bitbucket as the repository
+    
+    '''
+# This is a sample build configuration for Scala.
+# Check our guides at https://confluence.atlassian.com/x/5Q4SMw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: deenar/scala-sbt:latest
+# enable Docker for your repository
+options:
+  docker: true
+
+pipelines:
+  default:
+    - step:
+        script: # Modify the commands below to build your repository.
+          - sbt test
+
+  custom:
+    deployHeroku:
+    - step:
+        script: # Modify the commands below to build your repository.
+          - sbt stage deployHeroku
+
+    googleCloudRun:
+    - step:
+        script: # Modify the commands below to build your repository.
+          - sbt docker:publishLocal
+          - docker save -o tmp-image.docker eu.gcr.io/payment-rules/api:1.0
+        artifacts:
+          - tmp-image.docker
+
+    - step:
+          name: Build - Push - Deploy to GCP (gcr.io/payment-rules/api) for Production
+          image: google/cloud-sdk:latest
+          caches:
+            - docker
+          deployment: production
+          script:
+            - export GCLOUD_PROJECT=payment-rules
+            - echo $GCLOUD_API_KEYFILE | base64 --decode --ignore-garbage> ./gcloud-api-key.json
+            - gcloud auth activate-service-account --key-file gcloud-api-key.json
+
+            # Linking to the Google Cloud project
+            - gcloud config set project $GCLOUD_PROJECT          
+            - gcloud config list
+
+            # set image name
+            - export IMAGE_NAME=eu.gcr.io/payment-rules/api:1.0 # ex. gcr.io/my-g-project/my-cr-service
+            - export SERVICE_NAME=api
+
+            # Gcloud auth and check
+            - gcloud auth activate-service-account payment-rules@appspot.gserviceaccount.com --key-file=gcloud-api-key.json
+            - gcloud config list
+
+            # config image registry with gcloud helper
+            - gcloud auth configure-docker -q
+
+            # push image to gcr
+            - docker load --input ./tmp-image.docker
+            - docker push $IMAGE_NAME
+
+            # deploy to cloud run
+            - gcloud beta run deploy $SERVICE_NAME --image $IMAGE_NAME --region us-central1 --project payment-rules --platform managed --allow-unauthenticated --memory=512Mi
+
+            # :-)
+            - echo "May the force be with you."
+
+    
+    '''
+    
+    - Check you application 
+    - Look at logs for troubleshooting
+
+    
+    
