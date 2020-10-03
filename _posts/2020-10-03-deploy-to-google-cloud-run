@@ -6,12 +6,12 @@ published: false
 - Google Cloud CLI
 - Dockerized Application
 
-Step 1
+##Step 1 - Create a GCP Service Account
+- Create a service account under IAM
+- Grant it the following roles
+- Download the credentials
 
-
-
-
-Enter text in [Markdown](http://daringfireball.net/projects/markdown/). Use the toolbar above, or click the **?** button for formatting help.
+##Step 2 - Push your Docker image to [GCR](https://cloud.google.com/container-registry)
 
 dockerBaseImage := "java:8-jre"
 packageName in Docker := "you-gcloud-project-id/api"
@@ -19,12 +19,8 @@ maintainer in Docker := "Maintainer"
 packageSummary := "Package summary"
 packageDescription := "Package description"
 dockerRepository := Some("us.gcr.io")
-Steps
 
-Substitute your Google Cloud Project ID in the packageName field
-
-Set dockerRepository to whichever gcr.io host you want to use.
-
-Authenticate using the Google Cloud SDK
-
-Run sbt docker:publish
+- Substitute your Google Cloud Project ID in the packageName field
+- Set dockerRepository to whichever gcr.io host you want to use.
+- Authenticate using the Google Cloud SDK
+- Run sbt docker:publish
