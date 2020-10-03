@@ -18,6 +18,7 @@ categories:
 - Grant it the following roles
 - Download the credentials
 
+
 ## Step 2 - Push your Docker image to [GCR](https://cloud.google.com/container-registry)
 Customise your Docker image publishing in build.sbt
 ```
