@@ -6,12 +6,12 @@ published: false
 - Google Cloud CLI
 - Dockerized Application
 
-##Step 1 - Create a GCP Service Account
+## Step 1 - Create a GCP Service Account
 - Create a service account under IAM
 - Grant it the following roles
 - Download the credentials
 
-##Step 2 - Push your Docker image to [GCR](https://cloud.google.com/container-registry)
+## Step 2 - Push your Docker image to [GCR](https://cloud.google.com/container-registry)
 Customise your Docker image publishing in build.sbt
 ```
 dockerBaseImage := "java:8-jre"
@@ -37,16 +37,16 @@ dockerRepository := Some("us.gcr.io")
     - Under advanced setting choose memory and CPU allocation and auto scaling parameters
     - Press Create
     
-## Step 3 - Check your application    
+## Step 4 - Check your application    
     - GCP deploys your application and makes it available on the URL listed
     - Check you application 
     - Look at logs for troubleshooting
     
 
-## Step 4 - Automate the boring stuff so you can focus on the important bits    
-    - I am using bitbucket as the repository, here is my /bitbucket-pipelines.yml. I have added a pipeline to deploy to GCP. It listens to changes on tag master release-gcp-* and kicks of the process we did manually before. I store the service credentials in bitbuckets environment variables, which are encrypted and stored in a vault.
+## Step 5 - Automate the boring stuff so you can focus on the important bits    
+I am using bitbucket as the repository, here is my /bitbucket-pipelines.yml. I have added a pipeline to deploy to GCP. It listens to changes on tag master release-gcp-* and kicks of the process we did manually before. I store the service credentials in bitbuckets environment variables, which are encrypted and stored in a vault.
     
-    '''
+```
 image: deenar/scala-sbt:latest
 # enable Docker for your repository
 options:
@@ -57,19 +57,16 @@ pipelines:
     - step:
         script: 
           - sbt test
-
   tags:
-    release-gcp-*:
-
-    googleCloudRun:
+    release-cloudrun-*:
     - step:
-        script: # Modify the commands below to build your repository.
+        script: # Build your repository and publish a docker image
           - sbt docker:publishLocal
           - docker save -o tmp-image.docker eu.gcr.io/payment-rules/api:1.0
         artifacts:
           - tmp-image.docker
 
-    - step:
+    - step: # push the docker image to GCP using service acc credentials
           name: Build - Push - Deploy to GCP (gcr.io/payment-rules/api) for Production
           image: google/cloud-sdk:latest
           caches:
