@@ -104,7 +104,6 @@ pipelines:
 
             # :-)
             - echo "Hope you found this blog post useful"
-
-    '''
+```
     
     
