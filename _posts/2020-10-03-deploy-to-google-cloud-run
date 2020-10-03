@@ -43,15 +43,10 @@ dockerRepository := Some("us.gcr.io")
     - Look at logs for troubleshooting
     
 
-## Step 4 - Automate your deployment process    
-    - I am using bitbucket as the repository
+## Step 4 - Automate the boring stuff so you can focus on the important bits    
+    - I am using bitbucket as the repository, here is my /bitbucket-pipelines.yml. I have added a pipeline to deploy to GCP. It listens to changes on tag master release-gcp-* and kicks of the process we did manually before. I store the service credentials in bitbuckets environment variables, which are encrypted and stored in a vault.
     
     '''
-# This is a sample build configuration for Scala.
-# Check our guides at https://confluence.atlassian.com/x/5Q4SMw for more examples.
-# Only use spaces to indent your .yml configuration.
-# -----
-# You can specify a custom docker image from Docker Hub as your build environment.
 image: deenar/scala-sbt:latest
 # enable Docker for your repository
 options:
@@ -60,14 +55,11 @@ options:
 pipelines:
   default:
     - step:
-        script: # Modify the commands below to build your repository.
+        script: 
           - sbt test
 
-  custom:
-    deployHeroku:
-    - step:
-        script: # Modify the commands below to build your repository.
-          - sbt stage deployHeroku
+  tags:
+    release-gcp-*:
 
     googleCloudRun:
     - step:
@@ -111,13 +103,8 @@ pipelines:
             - gcloud beta run deploy $SERVICE_NAME --image $IMAGE_NAME --region us-central1 --project payment-rules --platform managed --allow-unauthenticated --memory=512Mi
 
             # :-)
-            - echo "May the force be with you."
+            - echo "Hope you found this blog post useful"
 
-    
     '''
-    
-    - Check you application 
-    - Look at logs for troubleshooting
-
     
     
