@@ -1,8 +1,12 @@
 ---
-published: true
+published: false
 layout: post
 title: Deploying your application to Google Cloud Run
-categories: [GCP, DevOps, Docker, Bitbucket]
+categories:
+  - GCP
+  - DevOps
+  - Docker
+  - Bitbucket
 ---
 ## Checklist
 - Google Cloud Account
@@ -105,5 +109,3 @@ pipelines:
             # :-)
             - echo "Hope you found this blog post useful"
 ```
-    
-    
