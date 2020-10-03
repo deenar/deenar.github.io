@@ -16,6 +16,9 @@ categories:
 ## Step 1 - Create a GCP Service Account
 - Create a service account under IAM
 - Grant it the following roles
+	- Storage Admin: for pushing docker images to GCR.
+	- Cloud Run Admin: for deploying a service to Cloud Run.
+	- IAM Service Account user
 - Download the credentials
 
 
