@@ -7,7 +7,7 @@ published: false
 - Dockerized Application, [see part 1 of this article](https://deenar.github.io./dockerising-scala-app-with-sbt/)
 
 ## Step 1 - Create a GCP Service Account
-- Create a service account under IAM
+- [Create a service account under IAM](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
 - Grant it the following roles
 	- Storage Admin: for pushing docker images to GCR.
 	- Cloud Run Admin: for deploying a service to Cloud Run.
