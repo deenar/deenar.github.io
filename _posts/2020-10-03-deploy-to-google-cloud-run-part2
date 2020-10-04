@@ -2,7 +2,7 @@
 published: false
 ---
 ## Checklist
-- [Google Cloud Account](https://cloud.google.com/free)
+- [Google Cloud Account](https://cloud.google.com/free)[https://cloud.google.com/iam/docs/creating-managing-service-account-keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
 - [Google Cloud CLI](https://cloud.google.com/sdk/docs/install)
 - Dockerized Application, [see part 1 of this article](https://deenar.github.io./dockerising-scala-app-with-sbt/)
 
@@ -12,8 +12,10 @@ published: false
 	- Storage Admin: for pushing docker images to GCR.
 	- Cloud Run Admin: for deploying a service to Cloud Run.
 	- IAM Service Account user
-- Download the credentials
-![]({{site.baseurl}}deenar/deenar.github.io/master/_posts/Screenshot%202020-10-03%20at%2000.29.01.png)
+    
+ ![Screenshot 2020-10-03 at 00.30.45.png]({{site.baseurl}}/_posts/Screenshot 2020-10-03 at 00.30.45.png)
+
+- [Create a key and download the credentials](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
 
 ## Step 2 - Push your Docker image to [GCR](https://cloud.google.com/container-registry)
 Customise your Docker image publishing in build.sbt
@@ -26,27 +28,27 @@ packageDescription := "Package description"
 dockerRepository := Some("us.gcr.io")
 ```
 - Substitute your Google Cloud Project ID in the packageName field
-- Set dockerRepository to whichever gcr.io host you want to use.
+- Set dockerRepository to whichever gcr.io host you want to use. e.g. `us.gcr.io`
 - Authenticate using the Google Cloud SDK using the service account credentials used in Step 1
-- Run sbt docker:publish
+- Run `sbt docker:publish`
 
 ## Step 3 - Create a Google Cloud Run service
 [Head to Google Cloud Run](https://console.cloud.google.com/run) and create a new service
 	- Select a region
-    - Pick a service name
+    - Pick a service name, e.g. `api`
     - Select unauthenticated invocations
-    - Choose the container image you uploaded to GCR in Step 2
-    - Ask GCP to forward traffic to the port your application listens on and set any environment variables required
+    - Choose the container image you uploaded to GCR in Step 2 e.g. `eu.gcr.io/payment-rules/api:1.0`
+    - Ask GCP to forward traffic to the port your application listens on and set any environment variables required. Alternatively your app should use the $PORT environment variable to listen on.
     - Choose the service account created in Step 1 to run the application
     - Under advanced setting choose memory and CPU allocation and auto scaling parameters
-    - Press Create
-    
+    - Press Create and your app is ready to serve your clients
+   ![googlecloudrun.jpg]({{site.baseurl}}/_posts/googlecloudrun.jpg)
+ 
 ## Step 4 - Check your application    
     - GCP deploys your application and makes it available on the URL listed
     - Check you application 
-    - Look at logs for troubleshooting
+    - Look at logs in Stackdriver for troubleshooting
     
-
 ## Step 5 - Automate the boring stuff so you can focus on the important bits    
 I am using bitbucket as the repository, here is my /bitbucket-pipelines.yml. I have added a pipeline to deploy to GCP. It listens to changes on tag master release-gcp-* and kicks of the process we did manually before. I store the service credentials in bitbuckets environment variables, which are encrypted and stored in a vault.
     
