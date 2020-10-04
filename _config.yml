@@ -136,8 +136,8 @@ prose:
       - name: "category"
         field:
           element: "multiselect"
-          label: "Add Tags"
-          placeholder: "Choose Tags"
+          label: "Add Categories"
+          placeholder: "Choose Categories"
           alterable: true
           options:
             - name: "Docker"
@@ -146,10 +146,6 @@ prose:
               value: "scala"
             - name: "Cloud"
               value: "cloud"
-            - name: "CLI"
-              value: "cli"
-            - name: "Humor"
-              value: "humor"
             - name: "Ruby"
               value: "ruby"
             - name: "Javascript"
