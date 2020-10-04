@@ -2,9 +2,9 @@
 published: false
 ---
 ## Checklist
-- Google Cloud Account
-- Google Cloud CLI
-- Dockerized Application
+- [Google Cloud Account](https://cloud.google.com/free)
+- [Google Cloud CLI](https://cloud.google.com/sdk/docs/install)
+- Dockerized Application, [see part 1 of this article](https://deenar.github.io./dockerising-scala-app-with-sbt/)
 
 ## Step 1 - Create a GCP Service Account
 - Create a service account under IAM
@@ -13,7 +13,7 @@ published: false
 	- Cloud Run Admin: for deploying a service to Cloud Run.
 	- IAM Service Account user
 - Download the credentials
-
+![]({{site.baseurl}}deenar/deenar.github.io/master/_posts/Screenshot%202020-10-03%20at%2000.29.01.png)
 
 ## Step 2 - Push your Docker image to [GCR](https://cloud.google.com/container-registry)
 Customise your Docker image publishing in build.sbt
