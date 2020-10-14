@@ -9,6 +9,12 @@ category:
   - scala
 photo_url: ''
 ---
+## A New Post
+![Google Cloud Run](/_posts/googlecloudrun.jpg)
+
+Another Image
+![with site base url]({{site.baseurl}}/_posts/googlecloudrun.jpg)
+
 ## Checklist
 - [Google Cloud Account](https://cloud.google.com/free)[https://cloud.google.com/iam/docs/creating-managing-service-account-keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
 - [Google Cloud CLI](https://cloud.google.com/sdk/docs/install)
