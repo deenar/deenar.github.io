@@ -1,5 +1,11 @@
 ---
+layout: post
 published: true
+disqus: true
+fbcomments: false
+title: Untitled
+photo_url: ''
+category: ''
 ---
 ## Checklist
 - [Google Cloud Account](https://cloud.google.com/free)[https://cloud.google.com/iam/docs/creating-managing-service-account-keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
@@ -8,14 +14,14 @@ published: true
 
 ## Step 1 - Create a GCP Service Account
 - [Create a service account under IAM](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
-![Screenshot 2020-10-04 at 16.32.06.png]({{site.baseurl}}/_posts/Screenshot 2020-10-04 at 16.32.06.png)
+![Create GCP Service Account]({{site.baseurl}}/media/gcpserviceaccount.png)
 
 - Grant it the following roles
 	- Storage Admin: for pushing docker images to GCR.
 	- Cloud Run Admin: for deploying a service to Cloud Run.
 	- IAM Service Account user
     
- ![Screenshot 2020-10-03 at 00.30.45.png]({{site.baseurl}}/_posts/Screenshot 2020-10-03 at 00.30.45.png)
+![Grant IAM roles]({{site.baseurl}}/media/iamroles.png)
 
 - [Create a key and download the credentials](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
 
@@ -48,8 +54,8 @@ Customise your Docker image publishing in build.sbt
 - Under advanced setting choose memory and CPU allocation and auto scaling parameters
 - Press Create and your app is ready to serve your clients
 
+![Create Google Cloud Run Service]({{site.baseurl}}/media/createService.jpg)
 
-   ![googlecloudrun.jpg]({{site.baseurl}}/_posts/googlecloudrun.jpg)
  
 ## Step 4 - Check your application    
 - GCP deploys your application and makes it available on the URL listed
