@@ -4,6 +4,8 @@ disqus: true
 fbcomments: false
 published: true
 title: ISO 20022 integration challenges
+photo_url: ''
+category: ''
 ---
 ISO 20022 is a global standard used to facilitate electronic data interchange between financial institutions. 
 ## Benefits
@@ -15,7 +17,7 @@ It provides many benefits not limited to
 * Increased straight-through processing rates
 * Richer data - for improved decision making
 
-![ISO20022 Integration Challenges](iso20022challenges.png)
+![ISO20022 Integration Challenges]({{site.baseurl}}/media/iso20022challenges.png)
 
 ## Benefits come at a cost
 
@@ -28,20 +30,20 @@ It provides many benefits not limited to
 names such as _FIToFICustomerCreditTransfer_, but they are hard to remember and get exactly right each time. 
 * One has to use full path such as _Document.FIToFICstmrdtTrf.GrpHdr.Sttlmlnf.lnstgRmbrsmntAgt.Finlnstnld.CIrSystbld.CIrSysId.Cd_ to access any element. There are no shortcuts.
 
- ![Deeply nested structures](nestedstructure.png)
+ ![Deeply nested structures]({{site.baseurl}}/media/nestedstructure.png)
 
 ### Multiple message types and variants
 * There are many message types, their local variants and versions each with its own schema.  At the last count there are 693 on the ISO 20022 website in the payments domain alone, not including previous versions.
 * If a process that needs to access the Sending institutions SWIFT code (BICFI). A business analyst has to go through multiple message definition reports and specify something similar to 
 * This is time consuming and is repeated many times. The application logic also needs to implement the specific logic.
 
-![Multiple message schemas](vocabulary.png)
+![Multiple message schemas]({{site.baseurl}}/media/vocabulary.png)
 
  ### XML and XML Tooling
  * XML is primarily designed for information interchange (messages) and is indispensible for implementing a global standard. Since XML is primarily a syntax for messages, it is hard to query and manipulate efficiently. 
  * The world has moved on from XML to other lightweight weight formats such as JSON. As a result, any innovation and tooling support improvements for XML have come to a standstill. Many XML open source projects are stuck in a limbo. 
   
-  ![xmlvsjson](xmlvsjson.png)
+  ![xmlvsjson]({{site.baseurl}}/media/xmlvsjson.png)
  * Most existing methods to manipulate XML are not type safe and you need to ensure the XML you create is compliant with the ISO 20022 schema. 
  ### ISO schema generation standard [ISO 20022-4:2013](https://www.iso.org/standard/55008.html)
  * The schema generation standard adopted by ISO has some quirks that makes ISO 20022 message manipulation even harder
@@ -53,4 +55,4 @@ names such as _FIToFICustomerCreditTransfer_, but they are hard to remember and 
  ## PayToolz
 We at [PayToolz](http://www.paytoolz.com) have come up with a set of tools to help with ISO 20022 integration and address each of the issues listed above. These tools are directly generated using the ISO 20022 metadata repository which ensure compliance with the standard is out of the box. More on out tools in part 2. 
  
-![PayToolz Toolkit](toolgeneration.png)
+![PayToolz Toolkit]({{site.baseurl}}/media/toolgeneration.png)
