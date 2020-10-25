@@ -2,10 +2,8 @@
 layout: post
 disqus: true
 fbcomments: false
-published: false
+published: true
 title: ISO 20022 integration challenges
-photo_url: ''
-category: ''
 ---
 # Why is ISO 20022 integration hard?
 ISO 20022 is a global standard used to facilitate electronic data interchange between financial institutions. You would have head a lot about ISO 20022 benefits, but ISO 20022 adoption throws up several challenges. We at Paytoolz encountered these when building an application designed to enrich and structure payment messages for straight through processing. We have come up with a set of tools to ease ISO 20022 integration, which I will cover in a subsequent post.
@@ -56,5 +54,3 @@ names such as _FIToFICustomerCreditTransfer_, but they are hard to remember and 
  
  ### PayToolz
  We at paytools
- 
-  
