@@ -4,8 +4,6 @@ disqus: true
 fbcomments: false
 published: true
 title: ISO 20022 integration challenges
-photo_url: ''
-category: ''
 ---
 ISO 20022 is a global standard used to facilitate electronic data interchange between financial institutions. 
 ## Benefits
@@ -39,20 +37,21 @@ names such as _FIToFICustomerCreditTransfer_, but they are hard to remember and 
 
 ![Multiple message schemas]({{site.baseurl}}/media/vocabulary.png)
 
- ### XML and XML Tooling
+### XML and XML Tooling
  * XML is primarily designed for information interchange (messages) and is indispensible for implementing a global standard. Since XML is primarily a syntax for messages, it is hard to query and manipulate efficiently. 
  * The world has moved on from XML to other lightweight weight formats such as JSON. As a result, any innovation and tooling support improvements for XML have come to a standstill. Many XML open source projects are stuck in a limbo. 
   
   ![xmlvsjson]({{site.baseurl}}/media/xmlvsjson.png)
  * Most existing methods to manipulate XML are not type safe and you need to ensure the XML you create is compliant with the ISO 20022 schema. 
- ### ISO schema generation standard [ISO 20022-4:2013](https://www.iso.org/standard/55008.html)
+
+### ISO schema generation standard [ISO 20022-4:2013](https://www.iso.org/standard/55008.html)
  * The schema generation standard adopted by ISO has some quirks that makes ISO 20022 message manipulation even harder
  * Schemas are not documented
  * Each message has a separate namespace making translations and conversions between versions harder
  * Complex types in schemas utilise <xs:sequence> tags which require items in a specific order instead of <xs:all>
  * Currency types use XML attributes for currency code making access and manipulation unnecessarily difficult.
  
- ## PayToolz
-We at [PayToolz](http://www.paytoolz.com) have come up with a set of tools to help with ISO 20022 integration and address each of the issues listed above. These tools are directly generated using the ISO 20022 metadata repository which ensure compliance with the standard is out of the box. More on out tools in part 2. 
+## PayToolz
+We at [PayToolz](http://www.paytoolz.com) have come up with a set of tools to help with ISO 20022 integration and address each of the issues listed above. These tools are directly generated using the ISO 20022 metadata repository which ensures compliance with the standard is out of the box. More on our tools in part 2. 
  
 ![PayToolz Toolkit]({{site.baseurl}}/media/toolgeneration.png)
