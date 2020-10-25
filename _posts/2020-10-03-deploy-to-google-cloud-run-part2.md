@@ -3,9 +3,7 @@ layout: post
 published: true
 disqus: true
 fbcomments: false
-title: Untitled
-photo_url: ''
-category: ''
+title: Automated deployment to Google Cloud Run
 ---
 ## Checklist
 - [Google Cloud Account](https://cloud.google.com/free)[https://cloud.google.com/iam/docs/creating-managing-service-account-keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
