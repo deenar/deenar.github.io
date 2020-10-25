@@ -38,8 +38,8 @@ names such as _FIToFICustomerCreditTransfer_, but they are hard to remember and 
 ![Multiple message schemas]({{site.baseurl}}/media/vocabulary.png)
 
 ### XML and XML Tooling
- * XML is primarily designed for information interchange (messages) and is indispensible for implementing a global standard. Since XML is primarily a syntax for messages, it is hard to query and manipulate efficiently. 
- * The world has moved on from XML to other lightweight weight formats such as JSON. As a result, any innovation and tooling support improvements for XML have come to a standstill. Many XML open source projects are stuck in a limbo. 
+ * XML is primarily designed for information interchange (messages) and is indispensable for implementing a global standard. Since XML is primarily a syntax for messages, it is hard to query and manipulate efficiently. 
+ * The world has moved on from XML to other lightweight weight formats such as JSON. As a result, any innovation and tooling support improvements for XML have come to a standstill. Many XML open source projects are stuck in limbo. 
   
   ![xmlvsjson]({{site.baseurl}}/media/xmlvsjson.png)
  * Most existing methods to manipulate XML are not type safe and you need to ensure the XML you create is compliant with the ISO 20022 schema. 
